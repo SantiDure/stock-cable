@@ -1,0 +1,8 @@
+.nav__link {
+  justify-content: end;
+  padding-right: 8rem;
+}
+
+.nav__nombre {
+  padding-left: 8rem;
+}
