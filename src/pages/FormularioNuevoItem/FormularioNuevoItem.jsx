@@ -2,6 +2,7 @@ import { db } from "../../config/firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 function FormularioNuevoItem() {
   const [cantidad, setCantidad] = useState("");
   const [categoria, setCategoria] = useState("");
@@ -16,10 +17,18 @@ function FormularioNuevoItem() {
   };
 
   const handleAddItem = () => {
-    const stockCollectionRef = collection(db, "stock");
-    addDoc(stockCollectionRef, nuevoItem).then(({ id }) =>
-      console.log(`el id del producto agregado es ${id}`)
-    );
+    if (!cantidad || !categoria || !elemento || !tipo) {
+      Swal.fire({
+        title: "error al agregar producto",
+        text: "completa todos los campos para agregar un item",
+        icon: "error",
+      });
+    } else {
+      const stockCollectionRef = collection(db, "stock");
+      addDoc(stockCollectionRef, nuevoItem).then(({ id }) =>
+        console.log(`el id del producto agregado es ${id}`)
+      );
+    }
   };
 
   return (
@@ -60,7 +69,7 @@ function FormularioNuevoItem() {
             Cantidad
           </label>
           <input
-            type="text"
+            type="number"
             id="disabledTextInput"
             className="form-control"
             placeholder="Ej. 4"
