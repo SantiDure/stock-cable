@@ -7,7 +7,6 @@ function FormularioEditarItem({ id, edit, setEdit }) {
   const [newCategoria, setNewCategoria] = useState();
   const [newElemento, setNewElemento] = useState();
   const [newTipo, setNewTipo] = useState();
-
   const handleUpdateItem = () => {
     if (!newCantidad || !newCategoria || !newElemento || !newTipo) {
       Swal.fire({
@@ -21,6 +20,7 @@ function FormularioEditarItem({ id, edit, setEdit }) {
         elemento: newElemento,
         tipo: newTipo,
       });
+
       Swal.fire({
         title: "Item actualizado",
         icon: "info",

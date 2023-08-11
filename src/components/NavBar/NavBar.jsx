@@ -21,7 +21,7 @@ function NavBar() {
         <div className="collapse navbar-collapse nav__link" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link active" aria-current="page" href="#">
+              <Link to="/" className="nav-link active" aria-current="page">
                 Inicio
               </Link>
             </li>
@@ -36,24 +36,16 @@ function NavBar() {
               </span>
               <ul className="dropdown-menu">
                 <li>
-                  <Link to={"categorias/fuentes"} className="dropdown-item">
+                  <Link to={"categoria/conectores"} className="dropdown-item">
                     Conectores
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to={"categorias/almacenamiento"}
-                    className="dropdown-item"
-                  >
+                  <Link to={"categoria/divisores"} className="dropdown-item">
                     Divisores
                   </Link>
                 </li>
               </ul>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" href="#">
-                Buscar
-              </Link>
             </li>
           </ul>
         </div>
