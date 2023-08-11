@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { Link } from "react-router-dom";
-import { deleteDoc, doc } from "firebase/firestore";
+import Item from "../Item/Item";
 function Home() {
   const [loading, setLoading] = useState(true);
   const [stock, setStock] = useState([]);
@@ -37,20 +37,14 @@ function Home() {
       <div>
         {stock.map((item) => {
           return (
-            <div key={item.id} className="card card-container">
-              <p className="card'text">Categoria: {item.categoria} </p>
-              <p className="card'text">Elemento: {item.elemento}</p>
-              <p className="card'text">Tipo: {item.tipo}</p>
-              <p className="card'text">Cantidad: {item.cantidad}</p>
-              <button className="btn btn-primary">editar</button>
-              <br></br>
-              <button
-                className="btn btn-danger"
-                onClick={() => deleteDoc(doc(db, "stock", item.id))}
-              >
-                eliminar
-              </button>
-            </div>
+            <Item
+              key={item.id}
+              id={item.id}
+              elemento={item.elemento}
+              tipo={item.tipo}
+              cantidad={item.cantidad}
+              categoria={item.categoria}
+            />
           );
         })}
       </div>

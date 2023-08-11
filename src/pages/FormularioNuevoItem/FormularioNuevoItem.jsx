@@ -26,7 +26,15 @@ function FormularioNuevoItem() {
     } else {
       const stockCollectionRef = collection(db, "stock");
       addDoc(stockCollectionRef, nuevoItem).then(({ id }) =>
-        console.log(`el id del producto agregado es ${id}`)
+        Swal.fire({
+          title: `Añadiste un item a la lista`,
+          html: `
+                <h4>${elemento}</h4>
+                Tipo: ${tipo}<br>
+                Cantidad: ${cantidad}
+                `,
+          icon: "success",
+        })
       );
     }
   };
