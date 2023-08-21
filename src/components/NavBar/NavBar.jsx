@@ -2,11 +2,9 @@ import { Link } from "react-router-dom";
 import "./NavBar.css";
 function NavBar() {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary ">
+    <nav className="navbar navbar-expand-lg nav__container">
       <div className="container-fluid ">
-        <Link className="navbar-brand nav__nombre" href="#">
-          OCANET - STOCK
-        </Link>
+        <Link className="navbar-brand nav__nombre">OCANET - STOCK</Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -19,7 +17,7 @@ function NavBar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse nav__link" id="navbarNav">
-          <ul className="navbar-nav">
+          <ul className="navbar-nav nav__opciones">
             <li className="nav-item">
               <Link to="/" className="nav-link active" aria-current="page">
                 Inicio
@@ -46,6 +44,11 @@ function NavBar() {
                   </Link>
                 </li>
               </ul>
+            </li>
+            <li className="nav-item">
+              <Link to={"nuevo-item"}>
+                <button className="btn btn-success">Agregar item</button>
+              </Link>
             </li>
           </ul>
         </div>

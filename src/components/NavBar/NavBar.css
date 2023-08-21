@@ -1,8 +1,24 @@
+:root {
+  --text-color: #ffffff;
+}
+
+.nav__container {
+  margin-bottom: 2rem;
+  background-color: #1b356e;
+  color: var(--text-color);
+}
+
 .nav__link {
   justify-content: end;
   padding-right: 8rem;
+  color: var(--text-color);
 }
 
 .nav__nombre {
   padding-left: 8rem;
+}
+
+.nav__opciones {
+  align-items: center;
+  color: var(--text-color);
 }

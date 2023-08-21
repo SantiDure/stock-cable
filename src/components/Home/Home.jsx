@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../config/firebase";
-import { Link } from "react-router-dom";
 import Item from "../Item/Item";
 function Home() {
   const [loading, setLoading] = useState(true);
@@ -30,10 +29,6 @@ function Home() {
 
   return (
     <>
-      <Link to={"nuevo-item"}>
-        <button className="btn btn-success">Agregar item</button>
-      </Link>
-      <br></br>
       <div>
         {stock.map((item) => {
           return (

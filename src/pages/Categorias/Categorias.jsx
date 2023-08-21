@@ -36,7 +36,7 @@ function Categorias() {
 
   return (
     <>
-      <Link to={"nuevo-item"}>
+      <Link to={"/nuevo-item"}>
         <button className="btn btn-success">Agregar item</button>
       </Link>
       <br></br>
