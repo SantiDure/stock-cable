@@ -16,9 +16,16 @@
 
 .nav__nombre {
   padding-left: 8rem;
+  text-decoration: none;
+  color: var(--text-color);
 }
 
 .nav__opciones {
   align-items: center;
+}
+
+.nav__menu {
+  text-decoration: none;
   color: var(--text-color);
+  margin: 1rem;
 }

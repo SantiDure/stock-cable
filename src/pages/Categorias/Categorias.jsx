@@ -45,6 +45,7 @@ function Categorias() {
           return (
             <Item
               key={item.id}
+              img={item.imagen}
               id={item.id}
               elemento={item.elemento}
               tipo={item.tipo}

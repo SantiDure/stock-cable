@@ -12,7 +12,7 @@ function Item({ id, elemento, tipo, cantidad, categoria, img }) {
   };
   return (
     <>
-      <div key={id} className="card mb-3">
+      <div key={id} className="card mb-3 card__container">
         <div className="row g-0 text__container">
           <div className="col-md-2 item__img__container">
             <img
@@ -22,7 +22,7 @@ function Item({ id, elemento, tipo, cantidad, categoria, img }) {
               alt={elemento}
             />
           </div>
-          <div className="col-md-10 card__container">
+          <div className="col-md-10 card__content">
             <div className="card-body">
               <h5 className="card-title">{elemento}</h5>
               <p className="card-text">{tipo}</p>

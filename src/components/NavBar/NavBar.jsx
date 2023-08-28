@@ -4,7 +4,9 @@ function NavBar() {
   return (
     <nav className="navbar navbar-expand-lg nav__container">
       <div className="container-fluid ">
-        <Link className="navbar-brand nav__nombre">OCANET - STOCK</Link>
+        <Link className=" nav__nombre">
+          <strong>OCANET - STOCK</strong>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -19,13 +21,13 @@ function NavBar() {
         <div className="collapse navbar-collapse nav__link" id="navbarNav">
           <ul className="navbar-nav nav__opciones">
             <li className="nav-item">
-              <Link to="/" className="nav-link active" aria-current="page">
+              <Link to="/" className=" active nav__menu" aria-current="page">
                 Inicio
               </Link>
             </li>
             <li className="nav-item dropdown">
               <span
-                className="nav-link dropdown-toggle"
+                className=" dropdown-toggle nav__menu"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -34,12 +36,18 @@ function NavBar() {
               </span>
               <ul className="dropdown-menu">
                 <li>
-                  <Link to={"categoria/conectores"} className="dropdown-item">
+                  <Link
+                    to={"categoria/conectores"}
+                    className="dropdown-item nav__menu"
+                  >
                     Conectores
                   </Link>
                 </li>
                 <li>
-                  <Link to={"categoria/divisores"} className="dropdown-item">
+                  <Link
+                    to={"categoria/divisores"}
+                    className="dropdown-item nav__menu"
+                  >
                     Divisores
                   </Link>
                 </li>

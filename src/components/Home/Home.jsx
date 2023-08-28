@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import Item from "../Item/Item";
+import "./Home.css";
 function Home() {
   const [loading, setLoading] = useState(true);
   const [stock, setStock] = useState([]);
@@ -29,7 +30,7 @@ function Home() {
 
   return (
     <>
-      <div>
+      <div className="cards">
         {stock.map((item) => {
           return (
             <Item
