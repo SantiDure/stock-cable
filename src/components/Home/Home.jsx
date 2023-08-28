@@ -35,6 +35,7 @@ function Home() {
             <Item
               key={item.id}
               id={item.id}
+              img={item.imagen}
               elemento={item.elemento}
               tipo={item.tipo}
               cantidad={item.cantidad}

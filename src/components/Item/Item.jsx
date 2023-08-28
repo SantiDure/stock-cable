@@ -2,9 +2,9 @@ import { db } from "../../config/firebase";
 import { deleteDoc, doc } from "firebase/firestore";
 import { useState } from "react";
 import FormularioEditarItem from "../FormularioEditarItem/FormularioEditarItem";
-import img from "../assets/no-disponible.jpeg";
+
 import "./Item.css";
-function Item({ id, elemento, tipo, cantidad, categoria }) {
+function Item({ id, elemento, tipo, cantidad, categoria, img }) {
   const [edit, setEdit] = useState(false);
 
   const handleEditItem = () => {
@@ -14,8 +14,13 @@ function Item({ id, elemento, tipo, cantidad, categoria }) {
     <>
       <div key={id} className="card mb-3">
         <div className="row g-0 text__container">
-          <div className="col-md-2">
-            <img src={img} className="img-fluid rounded-start" alt="..." />
+          <div className="col-md-2 item__img__container">
+            <img
+              src={img}
+              id="img__item"
+              className="img-fluid rounded-start"
+              alt={elemento}
+            />
           </div>
           <div className="col-md-10 card__container">
             <div className="card-body">
