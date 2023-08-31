@@ -11,7 +11,6 @@
 .nav__link {
   justify-content: end;
   padding-right: 8rem;
-  color: var(--text-color);
 }
 
 .nav__nombre {

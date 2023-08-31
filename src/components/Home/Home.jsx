@@ -22,7 +22,7 @@ function Home() {
       .catch((error) => {
         console.log(error);
       });
-  }, [stock]);
+  }, []);
 
   if (loading) {
     return <p>Cargando...</p>;
