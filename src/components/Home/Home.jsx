@@ -8,7 +8,8 @@ function Home() {
   const [loading, setLoading] = useState(true);
   const [stock, setStock] = useState([]);
   const itemCollectionRef = collection(db, "stock");
-  useEffect(() => {
+  
+  const getData=()=>{
     getDocs(itemCollectionRef)
       .then(async (response) => {
         const filteredData = response.docs.map((doc) => ({
@@ -21,8 +22,13 @@ function Home() {
 
       .catch((error) => {
         console.log(error);
-      });
-  }, []);
+      })
+      
+  }
+  
+  useEffect(()=>
+  getData()
+  , []);
 
   if (loading) {
     return <p>Cargando...</p>;

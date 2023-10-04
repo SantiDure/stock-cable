@@ -1,9 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { doc, updateDoc } from "firebase/firestore";
+import { getDocs, collection } from "firebase/firestore";
+
 import { db } from "../../config/firebase";
 function FormularioEditarItem({ id, edit, setEdit }) {
   const [newCantidad, setNewCantidad] = useState();
+
+  const [loading, setLoading] = useState(true);
+  const [stock, setStock] = useState([]);
+  const itemCollectionRef = collection(db, "stock");
+  
+  const getData=()=>{
+    getDocs(itemCollectionRef)
+      .then(async (response) => {
+        const filteredData = response.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setStock(filteredData);
+        setLoading(false);
+      })
+
+      .catch((error) => {
+        console.log(error);
+      })
+      
+  }
 
   const handleUpdateItem = () => {
     if (!newCantidad) {
@@ -12,17 +35,21 @@ function FormularioEditarItem({ id, edit, setEdit }) {
         icon: "error",
       });
     } else {
+
       updateDoc(doc(db, "stock", id), {
         cantidad: newCantidad
       });
-
       Swal.fire({
         title: "Item actualizado",
         icon: "info",
       });
       setEdit(false);
+     
+      
     }
   };
+
+useEffect(()=>getData(),[edit])
 
   return (
     <>

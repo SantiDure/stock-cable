@@ -6,19 +6,17 @@ import Swal from "sweetalert2";
 function FormularioNuevoItem() {
   const [cantidad, setCantidad] = useState("");
   const [categoria, setCategoria] = useState("");
-  const [elemento, setElemento] = useState("");
   const [tipo, setTipo] = useState("");
   const [img, setImg] = useState();
   const nuevoItem = {
     imagen: img,
     cantidad: cantidad,
     categoria: categoria,
-    elemento: elemento,
     tipo: tipo,
   };
 
   const handleAddItem = () => {
-    if (!cantidad || !categoria || !elemento || !tipo) {
+    if (!cantidad || !categoria  || !tipo) {
       Swal.fire({
         title: "error al agregar producto",
         text: "completa todos los campos para agregar un item",
@@ -30,8 +28,7 @@ function FormularioNuevoItem() {
         Swal.fire({
           title: `Añadiste un item a la lista`,
           html: `
-                <h4>${elemento}</h4>
-                Tipo: ${tipo}<br>
+                <h4>${tipo}</h4>
                 Cantidad: ${cantidad}
                 `,
           icon: "success",
@@ -90,21 +87,7 @@ function FormularioNuevoItem() {
   return (
     <form>
       <fieldset>
-        <div className="mb-3">
-          <label htmlFor="disabledTextInput" className="form-label">
-            Elemento
-          </label>
-          <input
-            type="text"
-            id="disabledTextInput"
-            className="form-control"
-            placeholder="Ej. Conector"
-            onChange={(e) => {
-              e.preventDefault();
-              setElemento(e.target.value);
-            }}
-          />
-        </div>
+        
         <div className="mb-3">
           <label htmlFor="disabledSelect" className="form-label">
             Tipo
