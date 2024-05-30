@@ -3,6 +3,21 @@ import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import conectorFo from "../../img/conectorFo.webp";
+import divisorX2 from "../../img/divisorX2.webp";
+import divisorX3 from "../../img/divisorX3.webp";
+import divisorX4 from "../../img/divisorX4.webp";
+import ethernet from "../../img/ethernet.webp";
+import noDisponible from "../../img/no-disponible.jpeg";
+import patchCord from "../../img/patchCord.webp";
+import rg6 from "../../img/rg6.webp";
+import rg11 from "../../img/rg11.webp";
+import rg59 from "../../img/rg59.webp";
+import rj45 from "../../img/rj45.webp";
+import splitSatelital from "../../img/split-satelital.webp";
+import splitX2Fo from "../../img/splitX2Fo.webp";
+import splitX4Fo from "../../img/splitX4Fo.webp";
+import splitX8Fo from "../../img/splitX8Fo.webp";
 function FormularioNuevoItem() {
   const [cantidad, setCantidad] = useState("");
   const [categoria, setCategoria] = useState("");
@@ -16,7 +31,7 @@ function FormularioNuevoItem() {
   };
 
   const handleAddItem = () => {
-    if (!cantidad || !categoria  || !tipo) {
+    if (!cantidad || !categoria || !tipo) {
       Swal.fire({
         title: "error al agregar producto",
         text: "completa todos los campos para agregar un item",
@@ -37,57 +52,58 @@ function FormularioNuevoItem() {
     }
   };
 
-  let UrlImagenDrive = "https://drive.google.com/uc?export=download&id=";
   const elegirImagen = (tipo) => {
     switch (tipo) {
       case "RG6":
-        setImg(`${UrlImagenDrive}1-9qbC3uXbZDr8abyAwZVPi3hpSnpDL4s`);
+        setImg(rg6);
         break;
       case "RG11":
-        setImg(`${UrlImagenDrive}18Ds008liIayQVJslVd2P8Xq3zSmxtsmc`);
+        setImg(rg11);
         break;
       case "RG59":
-        setImg(`${UrlImagenDrive}18lG9-7oD0EABqHXsaKjF1ptZWdBjEneY`);
+        setImg(rg59);
         break;
       case "Conector mecánico FO":
-        setImg(`${UrlImagenDrive}1Vu5qDlvqrizaso4rkd0c1n7_hggpkoTQ`);
+        setImg(conectorFo);
         break;
       case "Rj45":
-        setImg(`${UrlImagenDrive}1yyqXCWqjLx0TbBis1ElKa5OalQExXKss`);
+        setImg(rj45);
         break;
       case "Divisor x2":
-        setImg(`${UrlImagenDrive}1y_MkAD34aTjRsXZ9dguUP7ZOLX79jswy`);
+        setImg(divisorX2);
         break;
       case "Divisor x3":
-        setImg(`${UrlImagenDrive}1lafMgACwZAuhB2ooAg8hxdJlaxyWi5CX`);
+        setImg(divisorX3);
         break;
       case "Divisor x4":
-        setImg(`${UrlImagenDrive}1-sx3T3beXs5buVbaNN5MqJQMrDm49W9w`);
+        setImg(divisorX4);
         break;
       case "Split satelital":
-        setImg(`${UrlImagenDrive}1LuOIQitfB6wFDrSrBdFQ1F6cQTbPL64C`);
+        setImg(splitSatelital);
         break;
       case "Patch Cord":
-        setImg(`${UrlImagenDrive}1GR9rz3dY_EkHuxIkNkKHFCVZhgyRl0Lr`);
+        setImg(patchCord);
         break;
       case "Split x2 FO":
-        setImg(`${UrlImagenDrive}1nhR8REvEZ8VxecPiz75zWntKiVj4SD9u`);
+        setImg(splitX2Fo);
+        break;
+      case "Split x4 FO":
+        setImg(splitX4Fo);
         break;
       case "Split x8 FO":
-        setImg(`${UrlImagenDrive}1Ei8kIOifWXpqClqNfEG2XKbc13HkfT_g`);
+        setImg(splitX8Fo);
         break;
       case "Cable Ethernet":
-        setImg(`${UrlImagenDrive}1qvc9X5-jhdh2fZ7KOXLmlL2jELy9Gs_G`);
+        setImg(ethernet);
         break;
       default:
-        setImg(`${UrlImagenDrive}1JKb7OiFnyx30ah7cwiUBA_uEd5_8p5T-`);
+        setImg(noDisponible);
     }
   };
 
   return (
     <form>
       <fieldset>
-        
         <div className="mb-3">
           <label htmlFor="disabledSelect" className="form-label">
             Tipo
