@@ -31,6 +31,10 @@ function Home() {
     return <p>Cargando...</p>;
   }
 
+  if (stock.length === 0) {
+    return <p>No hay productos para mostrar.</p>;
+  }
+
   return (
     <>
       <div className="cards">

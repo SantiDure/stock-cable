@@ -10,8 +10,8 @@ function FormularioEditarItem({ id, edit, setEdit }) {
   const [loading, setLoading] = useState(true);
   const [stock, setStock] = useState([]);
   const itemCollectionRef = collection(db, "stock");
-  
-  const getData=()=>{
+
+  const getData = () => {
     getDocs(itemCollectionRef)
       .then(async (response) => {
         const filteredData = response.docs.map((doc) => ({
@@ -24,9 +24,8 @@ function FormularioEditarItem({ id, edit, setEdit }) {
 
       .catch((error) => {
         console.log(error);
-      })
-      
-  }
+      });
+  };
 
   const handleUpdateItem = () => {
     if (!newCantidad) {
@@ -35,28 +34,25 @@ function FormularioEditarItem({ id, edit, setEdit }) {
         icon: "error",
       });
     } else {
-
       updateDoc(doc(db, "stock", id), {
-        cantidad: newCantidad
+        cantidad: newCantidad,
       });
       Swal.fire({
         title: "Item actualizado",
         icon: "info",
       });
+      getData();
       setEdit(false);
-     
-      
     }
   };
 
-useEffect(()=>getData(),[edit])
+  useEffect(() => getData(), []);
 
   return (
     <>
       <div>
         <form>
           <fieldset>
-           
             <div className="mb-3">
               <label htmlFor="disabledTextInput" className="form-label">
                 Cantidad
@@ -72,7 +68,6 @@ useEffect(()=>getData(),[edit])
                 }}
               />
             </div>
-            
           </fieldset>
         </form>
         <button className="btn btn-primary" onClick={handleUpdateItem}>

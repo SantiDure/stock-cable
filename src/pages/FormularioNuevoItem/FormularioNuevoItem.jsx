@@ -160,8 +160,10 @@ function FormularioNuevoItem() {
             }}
           >
             <option>-</option>
-            <option>divisores</option>
-            <option>conectores</option>
+            <option>Divisores RG6</option>
+            <option>Conectores</option>
+            <option>Fibra Optica</option>
+            <option>Satelital</option>
           </select>
         </div>
 
