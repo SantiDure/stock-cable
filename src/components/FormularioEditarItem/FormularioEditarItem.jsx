@@ -1,45 +1,36 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import { doc, updateDoc } from "firebase/firestore";
-import { getDocs, collection } from "firebase/firestore";
-
+import { doc, updateDoc, getDocs, collection } from "firebase/firestore";
 import { db } from "../../config/firebase";
-function FormularioEditarItem({ id, edit, setEdit }) {
-  const [newCantidad, setNewCantidad] = useState();
 
+function FormularioEditarItem({ id, setEdit }) {
+  const [newCantidad, setNewCantidad] = useState("");
   const [loading, setLoading] = useState(true);
-  const [stock, setStock] = useState([]);
   const itemCollectionRef = collection(db, "stock");
 
   const getData = () => {
     getDocs(itemCollectionRef)
-      .then(async (response) => {
-        const filteredData = response.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        setStock(filteredData);
-        setLoading(false);
-      })
-
-      .catch((error) => {
-        console.log(error);
-      });
+      .then(() => setLoading(false))
+      .catch((error) => console.log(error));
   };
 
   const handleUpdateItem = () => {
     if (!newCantidad) {
       Swal.fire({
-        title: "Rellena todos los campos para editar un item",
+        title: "Ingresá una cantidad",
         icon: "error",
+        background: "#181c27",
+        color: "#e8eaf0",
+        confirmButtonColor: "#4f8ef7",
       });
     } else {
-      updateDoc(doc(db, "stock", id), {
-        cantidad: newCantidad,
-      });
+      updateDoc(doc(db, "stock", id), { cantidad: newCantidad });
       Swal.fire({
         title: "Item actualizado",
-        icon: "info",
+        icon: "success",
+        background: "#181c27",
+        color: "#e8eaf0",
+        confirmButtonColor: "#4f8ef7",
       });
       getData();
       setEdit(false);
@@ -49,35 +40,38 @@ function FormularioEditarItem({ id, edit, setEdit }) {
   useEffect(() => getData(), []);
 
   return (
-    <>
-      <div>
-        <form>
-          <fieldset>
-            <div className="mb-3">
-              <label htmlFor="disabledTextInput" className="form-label">
-                Cantidad
-              </label>
-              <input
-                type="number"
-                id="disabledTextInput"
-                className="form-control"
-                placeholder="Ej. 4"
-                onChange={(e) => {
-                  e.preventDefault();
-                  setNewCantidad(e.target.value);
-                }}
-              />
-            </div>
-          </fieldset>
-        </form>
-        <button className="btn btn-primary" onClick={handleUpdateItem}>
-          Confirmar
-        </button>
-        <button className="btn btn-danger" onClick={() => setEdit(false)}>
-          Cancelar
-        </button>
-      </div>
-    </>
+    <div className="item__edit-inner">
+      <span className="edit-label">Nueva cantidad:</span>
+      <input
+        type="number"
+        className="form-control"
+        placeholder="Ej. 10"
+        onChange={(e) => setNewCantidad(e.target.value)}
+      />
+      <button
+        className="btn-primary-custom"
+        style={{ flex: "none", padding: "7px 14px", fontSize: "13px" }}
+        onClick={handleUpdateItem}
+      >
+        Confirmar
+      </button>
+      <button
+        onClick={() => setEdit(false)}
+        style={{
+          padding: "7px 12px",
+          background: "transparent",
+          border: "1px solid var(--border)",
+          borderRadius: "var(--radius-sm)",
+          color: "var(--text-muted)",
+          cursor: "pointer",
+          fontSize: "13px",
+          fontFamily: "var(--font-body)",
+          transition: "all 0.2s"
+        }}
+      >
+        Cancelar
+      </button>
+    </div>
   );
 }
 

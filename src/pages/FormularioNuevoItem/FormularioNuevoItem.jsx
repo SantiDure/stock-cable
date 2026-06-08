@@ -3,6 +3,8 @@ import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import "../../styles/forms.css";
+
 import conectorFo from "../../img/conectorFo.webp";
 import divisorX2 from "../../img/divisorX2.webp";
 import divisorX3 from "../../img/divisorX3.webp";
@@ -18,148 +20,105 @@ import splitSatelital from "../../img/split-satelital.webp";
 import splitX2Fo from "../../img/splitX2Fo.webp";
 import splitX4Fo from "../../img/splitX4Fo.webp";
 import splitX8Fo from "../../img/splitX8Fo.webp";
+
 function FormularioNuevoItem() {
   const [cantidad, setCantidad] = useState("");
   const [categoria, setCategoria] = useState("");
   const [tipo, setTipo] = useState("");
   const [img, setImg] = useState();
-  const nuevoItem = {
-    imagen: img,
-    cantidad: cantidad,
-    categoria: categoria,
-    tipo: tipo,
+
+  const elegirImagen = (tipo) => {
+    const map = {
+      "RG6": rg6, "RG11": rg11, "RG59": rg59,
+      "Conector mecánico FO": conectorFo, "Rj45": rj45,
+      "Divisor x2": divisorX2, "Divisor x3": divisorX3, "Divisor x4": divisorX4,
+      "Split satelital": splitSatelital, "Patch Cord": patchCord,
+      "Split x2 FO": splitX2Fo, "Split x4 FO": splitX4Fo, "Split x8 FO": splitX8Fo,
+      "Cable Ethernet": ethernet,
+    };
+    setImg(map[tipo] || noDisponible);
   };
 
   const handleAddItem = () => {
     if (!cantidad || !categoria || !tipo) {
       Swal.fire({
-        title: "error al agregar producto",
-        text: "completa todos los campos para agregar un item",
+        title: "Campos incompletos",
+        text: "Completá todos los campos para agregar un item.",
         icon: "error",
+        background: "#181c27",
+        color: "#e8eaf0",
+        confirmButtonColor: "#4f8ef7",
       });
     } else {
       const stockCollectionRef = collection(db, "stock");
-      addDoc(stockCollectionRef, nuevoItem).then(({ id }) =>
+      addDoc(stockCollectionRef, { imagen: img, cantidad, categoria, tipo }).then(() =>
         Swal.fire({
-          title: `Añadiste un item a la lista`,
-          html: `
-                <h4>${tipo}</h4>
-                Cantidad: ${cantidad}
-                `,
+          title: "Item agregado",
+          html: `<b>${tipo}</b> — ${cantidad} unidades`,
           icon: "success",
+          background: "#181c27",
+          color: "#e8eaf0",
+          confirmButtonColor: "#4f8ef7",
         })
       );
     }
   };
 
-  const elegirImagen = (tipo) => {
-    switch (tipo) {
-      case "RG6":
-        setImg(rg6);
-        break;
-      case "RG11":
-        setImg(rg11);
-        break;
-      case "RG59":
-        setImg(rg59);
-        break;
-      case "Conector mecánico FO":
-        setImg(conectorFo);
-        break;
-      case "Rj45":
-        setImg(rj45);
-        break;
-      case "Divisor x2":
-        setImg(divisorX2);
-        break;
-      case "Divisor x3":
-        setImg(divisorX3);
-        break;
-      case "Divisor x4":
-        setImg(divisorX4);
-        break;
-      case "Split satelital":
-        setImg(splitSatelital);
-        break;
-      case "Patch Cord":
-        setImg(patchCord);
-        break;
-      case "Split x2 FO":
-        setImg(splitX2Fo);
-        break;
-      case "Split x4 FO":
-        setImg(splitX4Fo);
-        break;
-      case "Split x8 FO":
-        setImg(splitX8Fo);
-        break;
-      case "Cable Ethernet":
-        setImg(ethernet);
-        break;
-      default:
-        setImg(noDisponible);
-    }
-  };
-
   return (
-    <form>
-      <fieldset>
-        <div className="mb-3">
-          <label htmlFor="disabledSelect" className="form-label">
-            Tipo
-          </label>
+    <div className="form__page">
+      <div className="form__header">
+        <Link to="/" className="form__back">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+          </svg>
+          Volver al inicio
+        </Link>
+        <div className="form__title">Nuevo item</div>
+        <div className="form__subtitle">Agregar producto al inventario</div>
+      </div>
+
+      <div className="form__card">
+        <div className="form__group">
+          <label className="form__label">Tipo de producto</label>
           <select
-            id="disabledSelect"
-            className="form-select"
-            onChange={(e) => {
-              e.preventDefault();
-              setTipo(e.target.value);
-              elegirImagen(e.target.value);
-            }}
+            className="form__control form-select"
+            onChange={(e) => { setTipo(e.target.value); elegirImagen(e.target.value); }}
           >
-            <option>-</option>
+            <option value="">Seleccioná un tipo…</option>
             <option>RG6</option>
             <option>RG59</option>
             <option>RG11</option>
             <option>Conector mecánico FO</option>
             <option>Patch Cord</option>
             <option>Split x2 FO</option>
+            <option>Split x4 FO</option>
             <option>Split x8 FO</option>
             <option>Rj45</option>
             <option>Divisor x2</option>
             <option>Divisor x3</option>
             <option>Divisor x4</option>
             <option>Split satelital</option>
+            <option>Cable Ethernet</option>
           </select>
         </div>
-        <div className="mb-3">
-          <label htmlFor="disabledTextInput" className="form-label">
-            Cantidad
-          </label>
+
+        <div className="form__group">
+          <label className="form__label">Cantidad</label>
           <input
             type="number"
-            id="disabledTextInput"
-            className="form-control"
+            className="form__control form-control"
             placeholder="Ej. 4"
-            onChange={(e) => {
-              e.preventDefault();
-              setCantidad(e.target.value);
-            }}
+            onChange={(e) => setCantidad(e.target.value)}
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="disabledSelect" className="form-label">
-            Categoria
-          </label>
+
+        <div className="form__group">
+          <label className="form__label">Categoría</label>
           <select
-            id="disabledSelect"
-            className="form-select"
-            onChange={(e) => {
-              e.preventDefault();
-              setCategoria(e.target.value);
-            }}
+            className="form__control form-select"
+            onChange={(e) => setCategoria(e.target.value)}
           >
-            <option>-</option>
+            <option value="">Seleccioná una categoría…</option>
             <option>Divisores RG6</option>
             <option>Conectores</option>
             <option>Fibra Optica</option>
@@ -167,18 +126,21 @@ function FormularioNuevoItem() {
           </select>
         </div>
 
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={handleAddItem}
-        >
-          Añadir item
-        </button>
-        <Link to={"/"}>
-          <button className="btn btn-secondary">Volver</button>
-        </Link>
-      </fieldset>
-    </form>
+        <div className="form__divider" />
+
+        <div className="form__actions">
+          <button className="btn-primary-custom" type="button" onClick={handleAddItem}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Añadir item
+          </button>
+          <Link to="/" className="btn-secondary-custom">
+            Cancelar
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 }
 
